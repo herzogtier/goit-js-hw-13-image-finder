@@ -12,12 +12,23 @@ import { error } from '@pnotify/core';
 const refs = {
      imageContainer: document.querySelector('.gallery'),
      imageQueryInput: document.querySelector('input[name="query"]'),
-     imageLoadMoreBtn: document.querySelector('[data-action="load-more"]'),
+    imageLoadMoreBtn: document.querySelector('[data-action="load-more"]'),
+    //  imageLoadFullSize: document.querySelector('.js-img'),
 }
 const debounce = require('debounce');
+// const basicLightbox = require('basiclightbox')
 
 refs.imageQueryInput.addEventListener('input', debounce(onSearch, 1000));
 refs.imageLoadMoreBtn.addEventListener('click', loadImages);
+
+// document.querySelector('img.js-img').onclick = () => {
+
+// 	basicLightbox.create(`
+// 		<img width="1400" height="900" src="https://placehold.it/1400x900">
+// 	`).show()
+
+// }
+
 
 function pushError(err) {
   error({
@@ -73,6 +84,7 @@ function renderImageCard(image) {
     
     const markup = imageCard(image);
     refs.imageContainer.insertAdjacentHTML('beforeend', markup);
+    
     if (image.length === 0) { 
          pushError('Не можем найти картинки по вашему запросу!!!');
     }
