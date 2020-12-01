@@ -19,7 +19,9 @@ const debounce = require('debounce');
 // const basicLightbox = require('basiclightbox')
 
 refs.imageQueryInput.addEventListener('input', debounce(onSearch, 1000));
-refs.imageLoadMoreBtn.addEventListener('click', loadImages);
+refs.imageLoadMoreBtn.addEventListener('click', () => { 
+  loadImages().catch(error => pushError('Не найдены картинки по вашему запросу!!!')).finally(scroll);
+});
 
 // document.querySelector('img.js-img').onclick = () => {
 
@@ -39,7 +41,7 @@ function pushError(err) {
 /*=============Вспомогательная функция для избежания дублирования кода=========== */
 function loadImages() { 
     return API.fetchImageByQuery()
-        .then(renderImageCard).finally(scroll);
+        .then(renderImageCard);
         
     
 }
