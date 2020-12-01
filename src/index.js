@@ -5,6 +5,7 @@ import API from './js/apiService';
 import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/PNotify.css';
 import { error } from '@pnotify/core';
+// import { onClickImg } from './js/large-img';
 
 // const refs = getRefs();
 
@@ -13,24 +14,36 @@ const refs = {
      imageContainer: document.querySelector('.gallery'),
      imageQueryInput: document.querySelector('input[name="query"]'),
     imageLoadMoreBtn: document.querySelector('[data-action="load-more"]'),
-    //  imageLoadFullSize: document.querySelector('.js-img'),
 }
 const debounce = require('debounce');
-// const basicLightbox = require('basiclightbox')
+const basicLightbox = require('basiclightbox')
 
 refs.imageQueryInput.addEventListener('input', debounce(onSearch, 1000));
 refs.imageLoadMoreBtn.addEventListener('click', () => { 
   loadImages().catch(error => pushError('Не найдены картинки по вашему запросу!!!')).finally(scroll);
 });
 
-// document.querySelector('img.js-img').onclick = () => {
+refs.imageContainer.addEventListener('click', openLightBox);
 
-// 	basicLightbox.create(`
-// 		<img width="1400" height="900" src="https://placehold.it/1400x900">
-// 	`).show()
 
-// }
 
+
+function openLightBox(event) {
+  const set = { src: event.target.dataset.source, alt: event.target.alt };
+  openImage(set);
+}
+
+function openImage({ src, alt }) {
+  const instance = basicLightbox.create(`
+  <div class="full-image-container">
+  <img src="${src}" alt="${alt}" />
+  <a class="download" href="${src}" download="${
+    alt.split(',')[0]
+  }" target="_blank" /><i class="material-icons">cloud_download</i></a>
+  </div>
+`);
+  instance.show();
+}
 
 function pushError(err) {
   error({
