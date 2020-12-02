@@ -7,7 +7,6 @@ import '@pnotify/core/dist/PNotify.css';
 import { error } from '@pnotify/core';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 // import { onClickImg } from './js/large-img';
-// import '../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 // const refs = getRefs();
 
 

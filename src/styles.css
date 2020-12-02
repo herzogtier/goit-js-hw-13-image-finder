@@ -60,10 +60,16 @@ body {
   margin: 15px;
 }
 
+.stats {
+  display: flex;
+  align-items: center;
+}
+
 .stats-item {
   display: flex;
+  margin-right: 15px;
 }
 
 .material-icons {
-  margin-right: 30px;
+  margin-right: 10px;
 }
